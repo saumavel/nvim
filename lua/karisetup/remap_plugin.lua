@@ -7,10 +7,9 @@ wk.add({
 	{ "<leader>f", group = "Find" },
 })
 
-wk.add({
-	{ "<leader>t",  group = "Terminal" },
-	{ "<leader>tc", "<cmd>:FloatermNew --autoclose=0 gcc % -o %< && ./%<<cr>", desc = "Run C code" },
-})
+-- wk.add({
+-- 	{ "<leader>t", group = "Terminal" },
+-- })
 
 wk.add({
 	{ "<leader>d",  group = "Diagnostics" },
@@ -24,11 +23,11 @@ wk.add({
 })
 
 wk.add({
-	{ "<leader>g", group = "Git" },
+	{ "<leader>g",  group = "Git" },
 	{ "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle line blame" },
 })
 
 wk.add({
-	{ "<leader>.",          group = "Settings" },
+	{ "<leader>.",  group = "Settings" },
 	{ "<leader>.s", "<cmd>nohlsearch<cr>", desc = "hide search highlight" },
 })

@@ -118,7 +118,7 @@ return {
 		{ "<leader>gf", function() Snacks.lazygit.log_file() end,      desc = "Lazygit Current File History" },
 		{ "<leader>gl", function() Snacks.lazygit.log() end,           desc = "Lazygit Log (cwd)" },
 
-		{ "<leader>tt", function() Snacks.terminal() end,              desc = "Toggle Terminal" },
+		{ "<leader>t",  function() Snacks.terminal() end,              desc = "Toggle Terminal" },
 		{ "<c-_>",      function() Snacks.terminal() end,              desc = "which_key_ignore" },
 		-- { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference" },
 		-- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
