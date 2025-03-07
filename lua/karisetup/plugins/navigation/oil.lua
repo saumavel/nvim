@@ -4,34 +4,21 @@ return {
 		{ "<leader>e", "<CMD>Oil<CR>", desc = 'Open Oil' }
 	},
 	opts = {
-		-- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
-		-- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
+		-- Your existing configuration
 		default_file_explorer = true,
-
-
-		-- Id is automatically added at the beginning, and name at the end
-		-- See :help oil-columns
 		columns = {
 			"icon",
-			-- "permissions",
-			-- "size",
-			-- "mtime",
 		},
-		-- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
 		skip_confirm_for_simple_edits = true,
-
-		-- Selecting a new/moved/renamed file or directory will prompt you to save changes first
-		-- (:help prompt_save_on_select_new_entry)
 		prompt_save_on_select_new_entry = true,
-
-		-- Constrain the cursor to the editable parts of the oil buffer
-		-- Set to `false` to disable, or "name" to keep it on the file names
 		constrain_cursor = "editable",
-
-		-- Set to true to watch the filesystem for changes and reload oil
 		watch_for_changes = true,
 
+		view_options = {
+			show_hidden = true,
+		},
 
+		-- Keep your existing keymaps
 		keymaps = {
 			["g?"] = "actions.show_help",
 			["l"] = "actions.select",
@@ -48,26 +35,6 @@ return {
 			["gx"] = "actions.open_external",
 			["g."] = "actions.toggle_hidden",
 			["g\\"] = "actions.toggle_trash",
-			-- ["<leader>ff"] = {
-			-- 	function()
-			-- 		require("telescope.builtin").find_files({
-			-- 			cwd = require("oil").get_current_dir()
-			-- 		})
-			-- 	end,
-			-- 	mode = "n",
-			-- 	nowait = true,
-			-- 	desc = "Find files in the current directory"
-			-- },
-			-- ["<leader>fg"] = {
-			-- 	function()
-			-- 		require("telescope.builtin").live_grep({
-			-- 			cwd = require("oil").get_current_dir()
-			-- 		})
-			-- 	end,
-			-- 	mode = "n",
-			-- 	nowait = true,
-			-- 	desc = "Grep in the current directory"
-			-- }
 			["<leader>ff"] = {
 				function()
 					require("fzf-lua").files({
@@ -87,13 +54,20 @@ return {
 				mode = "n",
 				nowait = true,
 				desc = "Grep in the current directory"
+			},
+			-- Add a custom keymap for PDF files
+			["zp"] = {
+				function()
+					local oil = require("oil")
+					local name = oil.get_cursor_entry().name
+					if name:match("%.pdf$") then
+						local path = oil.get_current_dir() .. name
+						vim.fn.jobstart(string.format("~/.local/bin/zathura-nix %s", vim.fn.shellescape(path)))
+					end
+				end,
+				desc = "Open PDF in Zathura"
 			}
 		},
 		use_default_keymaps = false,
-
-		view_options = {
-			-- Show files and directories that start with "."
-			show_hidden = true
-		},
 	},
 }
